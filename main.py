@@ -55,7 +55,6 @@ def chrome():
     return driver
 
 
-
 def get_game_odds(list_of_urls=url_list):
     cur = dbscript.cur
     query = """DELETE FROM bet"""
