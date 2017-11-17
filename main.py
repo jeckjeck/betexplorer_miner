@@ -116,7 +116,8 @@ def insert_into_db(date_, teams_, line_, home, away, cur, line_type=None):
         query = "UPDATE bet SET spread=%s WHERE Date=%s and teams=%s"
         cur.execute(query, (line_, date_, teams_))
     else:
-        query = "INSERT INTO bet (Date, teams, total, Result_h, Result_a, Result_t, Result_d) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+        query = "INSERT INTO bet (Date, teams, total, Result_h, Result_a, Result_t, " \
+                "Result_d) VALUES (%s,%s,%s,%s,%s,%s,%s)"
         cur.execute(query, (date_, teams_, line_, int(home), int(away), int(home) + int(away), int(away) - int(home)),)
 
 
@@ -128,11 +129,13 @@ def get_bookie(soup):
         [bookies.append(x.get('title')) for x in span_links if x.get('title')]
     return bookies
 
+
 def get_lines(soup):
     line_list = []
     lines = soup.findAll("td", {'table-main__doubleparameter'})
     [line_list.append(float(x.text)) for x in lines]
     return line_list
+
 
 def get_bookie_line(line_list, bookies, odds_list):
     bookie_lines = []
@@ -147,6 +150,7 @@ def get_bookie_line(line_list, bookies, odds_list):
             bookie_lines.append(line_list[i])
             # print(line_list[i], "diff",  diff)
     return bookie_lines, odds_diff
+
 
 def get_lines_func(soup):
     odds_list = []
