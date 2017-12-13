@@ -5,5 +5,6 @@ con = pymysql.connect(host="",  # your host, usually localhost
                        passwd="",  # your password
                        db="",  # name of the database
                        autocommit=True)
+
 with con:
     cur = con.cursor()
