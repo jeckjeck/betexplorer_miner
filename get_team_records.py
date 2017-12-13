@@ -35,10 +35,6 @@ def get_soup(url):
     site = requests.get(url)
     return bs(site.content, 'html.parser')
 
-def save_records_to_db(cur, team, wins, losses):
-    date = str(datetime.datetime.now())[:10]
-    query = "INSERT INTO nba (date, teams, wins, losses) VALUES (%s, %s,%s,%s)"
-    cur.execute(query, (date, team, wins, losses),)
 
 def get_team_and_current_record():
     soup = get_soup(url=url)
